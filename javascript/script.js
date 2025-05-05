@@ -77,3 +77,53 @@ for(i = 0; i< squadreCalcio.length; i++){
 
 
 console.log(arrayNomiFalli)
+
+
+// snack 3 bonus 
+
+// 1. L'utente crea il proprio array
+const inputUtente = prompt("Inserisci una serie di numeri separati da virgola (es: 10,20,30,40):");
+const arrayUtente = inputUtente.split(",").map(num => parseInt(num.trim()));
+
+// 2. L'utente inserisce due numeri presenti nell'array
+const inputA = parseInt(prompt("Inserisci il primo valore (deve esistere nell'array):"));
+const inputB = parseInt(prompt("Inserisci il secondo valore (deve esistere nell'array):"));
+
+// 3. La funzione per estrarre i numeri tra due valori
+function estraiTraValori(array, valoreA, valoreB) {
+  let indiceA = -1;
+  let indiceB = -1;
+
+  // Trova gli indici
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === valoreA && indiceA === -1) indiceA = i;
+    if (array[i] === valoreB && indiceB === -1) indiceB = i;
+  }
+
+  // Controlli
+  if (indiceA === -1 || indiceB === -1) {
+    console.log("Uno o entrambi i valori non sono presenti nell'array.");
+    return [];
+  }
+
+  // Assicuriamoci che indiceA venga prima di indiceB
+  if (indiceA > indiceB) {
+    // Se i valori sono invertiti, li scambiamo
+    let temp = indiceA;
+    indiceA = indiceB;
+    indiceB = temp;
+  }
+
+  // Estrazione manuale
+  const nuovoArray = [];
+  for (let i = indiceA; i <= indiceB; i++) {
+    nuovoArray.push(array[i]);
+  }
+
+  return nuovoArray;
+}
+
+// 4. Usiamo la funzione e stampiamo i risultati
+const risultato = estraiTraValori(arrayUtente, inputA, inputB);
+console.log("Array creato:", arrayUtente);
+console.log("Valori estratti:", risultato);
